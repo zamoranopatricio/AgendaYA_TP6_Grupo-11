@@ -4,6 +4,15 @@ body {
     padding: 20px;
 }
 
+.pending-box {
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+    padding: 15px;
+    border-radius: 6px;
+    margin-top: 15px;
+}
+
 .container {
     max-width: 500px;
     margin: auto;
