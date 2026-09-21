@@ -1,20 +1,20 @@
 describe('AgendaYA - M04 Proceso de Reserva Público', () => {
 
     beforeEach(() => {
-        cy.visit('http://127.0.0.1:5501/frontend/index.html');
+        cy.visit('/frontend/index.html');
     });
 
     it('Permite completar el flujo completo de reserva exitosa (Happy Path)', () => {
-        // Arrange: Cargar los datos de la reserva en el formulario
+        // Arrange
         cy.get('[data-cy="service-select"]').select('Consulta Inicial');
         cy.get('[data-cy="timeslot-select"]').select('2026-10-15 10:00');
         cy.get('[data-cy="name-input"]').type('Patricio Zamorano');
         cy.get('[data-cy="email-input"]').type('patricio.zamorano@test.com');
 
-        // Act: Confirmar la reserva haciendo clic en el botón
+        // Act
         cy.get('[data-cy="submit-booking"]').click();
 
-        // Assert: Verificar mensaje de reserva pendiente y log de notificación (M06)
+        // Assert
         cy.get('[data-cy="booking-confirmation"]')
             .should('be.visible')
             .and('contain', '¡Reserva Pendiente de Confirmación!')
