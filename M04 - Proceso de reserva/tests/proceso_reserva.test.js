@@ -1,4 +1,4 @@
-const { validarEmail, cumpleAntelacionMinima } = require('../src/logica-negocio');
+const { validarEmail, cumpleAntelacionMinima } = require('../src/proceso_reserva');
 
 describe('Suite de Tests Unitarios - Integrante 1 (M04 Booking)', () => {
 

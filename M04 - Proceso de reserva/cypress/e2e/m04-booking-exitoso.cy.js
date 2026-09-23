@@ -1,7 +1,7 @@
 describe('AgendaYA - M04 Proceso de Reserva Público', () => {
 
     beforeEach(() => {
-        cy.visit('/frontend/index.html');
+        cy.visit('/M04 - Proceso de reserva/frontend/proceso_reserva.html');
     });
 
     it('Permite completar el flujo completo de reserva exitosa (Happy Path)', () => {
