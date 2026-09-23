@@ -1,7 +1,7 @@
 describe('AgendaYA - M06 Configuración de Plantillas de Email (US_005 / M06-R04F)', () => {
 
     beforeEach(() => {
-        cy.visit('/frontend/plantillas.html');
+        cy.visit('/M06 - Notificaciones/frontend/plantillas.html');
     });
 
     it('Guarda la plantilla exitosamente cuando contiene [Fecha] y [Hora] (Happy Path)', () => {

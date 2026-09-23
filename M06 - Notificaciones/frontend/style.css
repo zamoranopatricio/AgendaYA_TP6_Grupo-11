@@ -1,0 +1,369 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    padding: 20px;
+}
+
+.pending-box {
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+    padding: 15px;
+    border-radius: 6px;
+    margin-top: 15px;
+}
+
+.container {
+    max-width: 650px;
+    margin: auto;
+    background: white;
+    padding: 0 0 24px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+input,
+select,
+button {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    box-sizing: border-box;
+}
+
+button {
+    background: #0066cc;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 15px;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+.summary-box {
+    background: #eef5fc;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.error {
+    color: #d93025;
+    background: #fde8e8;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+.success {
+    color: #188038;
+    background: #e6f4ea;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+#notifications-log {
+    background: #fafafa;
+    border: 1px dashed #ccc;
+    padding: 10px;
+    font-size: 13px;
+}
+
+/* ============================================================
+   BARRA DE NAVEGACIÓN
+   ============================================================ */
+.app-nav {
+    display: flex;
+    background: #0055aa;
+    padding: 0;
+    margin: 0;
+}
+
+.app-nav .nav-btn {
+    flex: 1;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.75);
+    border: none;
+    border-bottom: 3px solid transparent;
+    padding: 14px 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 0;
+    border-radius: 0;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+    letter-spacing: 0.02em;
+}
+
+.app-nav .nav-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.app-nav .nav-btn.active {
+    color: #fff;
+    border-bottom: 3px solid #ffcc00;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* ============================================================
+   VISTAS: contenido interno con padding
+   ============================================================ */
+#view-booking,
+#view-templates {
+    padding: 20px 24px;
+}
+
+/* ============================================================
+   M06 – PLANTILLAS DE EMAIL
+   ============================================================ */
+.templates-subtitle {
+    color: #666;
+    font-size: 13px;
+    margin: -8px 0 18px 0;
+}
+
+/* Fila superior: tabs + selector evento */
+.templates-top-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+}
+
+.template-tabs {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    background: #f0f4f8;
+    color: #333;
+    border: 1px solid #c8d4e0;
+    border-radius: 6px 6px 0 0;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 0;
+    width: auto;
+    transition: background 0.2s, color 0.2s;
+}
+
+.tab-btn:hover {
+    background: #d8e8f5;
+}
+
+.tab-btn.active {
+    background: #0066cc;
+    color: #fff;
+    border-color: #0066cc;
+}
+
+.event-type-wrapper {
+    flex: 1;
+    min-width: 180px;
+}
+
+.event-type-wrapper label {
+    margin-top: 0;
+    font-size: 13px;
+}
+
+.event-type-wrapper select {
+    margin-top: 4px;
+}
+
+/* Variables dinámicas */
+.variables-section {
+    margin-bottom: 12px;
+}
+
+.variables-label {
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 6px;
+}
+
+.variable-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.var-btn {
+    background: #e8f0fe;
+    color: #1a56aa;
+    border: 1px solid #b3caf0;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-family: monospace;
+    cursor: pointer;
+    margin-top: 0;
+    width: auto;
+    transition: background 0.2s, color 0.2s;
+}
+
+.var-btn:hover {
+    background: #c6daff;
+    color: #0044aa;
+}
+
+/* Textarea + contador */
+.textarea-wrapper {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.textarea-wrapper textarea {
+    width: 100%;
+    min-height: 160px;
+    padding: 10px;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    border: 1px solid #c8d4e0;
+    border-radius: 6px;
+    box-sizing: border-box;
+    resize: vertical;
+    line-height: 1.5;
+    transition: border-color 0.2s;
+    margin-top: 0;
+}
+
+.textarea-wrapper textarea:focus {
+    outline: none;
+    border-color: #0066cc;
+    box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.15);
+}
+
+.char-counter-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 4px;
+}
+
+#char-counter {
+    font-size: 12px;
+    color: #888;
+    transition: color 0.2s;
+}
+
+#char-counter.counter-warning {
+    color: #b45309;
+}
+
+#char-counter.counter-error {
+    color: #d93025;
+    font-weight: bold;
+}
+
+/* Botones de acción */
+.template-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.btn-primary {
+    flex: 2;
+    background: #0066cc;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 0;
+    transition: background 0.2s;
+}
+
+.btn-primary:hover {
+    background: #0050a0;
+}
+
+.btn-secondary {
+    flex: 1;
+    background: #f0f4f8;
+    color: #333;
+    border: 1px solid #c8d4e0;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 0;
+    transition: background 0.2s;
+}
+
+.btn-secondary:hover {
+    background: #dde8f5;
+}
+
+/* Contenedor oscuro que cubre toda la pantalla */
+[data-cy="success-modal"], .success-modal {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background-color: rgba(0, 0, 0, 0.45) !important;
+    z-index: 99999 !important;
+}
+
+/* Tarjeta blanca centrada geométricamente en el viewport */
+[data-cy="success-modal"] > div, .success-modal-content {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    margin: 0 !important;
+    text-align: center !important;
+    background: #fff;
+    border-radius: 10px;
+    padding: 32px 40px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    max-width: 340px;
+    width: 90%;
+}
+
+.success-icon {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.success-modal-content p {
+    font-size: 18px;
+    font-weight: bold;
+    color: #188038;
+    margin-bottom: 20px;
+}
+
+.btn-close-modal {
+    background: #0066cc;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 9px 28px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 0;
+    width: auto;
+    transition: background 0.2s;
+}
+
+.btn-close-modal:hover {
+    background: #0050a0;
+}
