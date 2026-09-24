@@ -23,6 +23,21 @@ body {
     overflow: hidden;
 }
 
+.container > h1,
+.container > section,
+.container > form,
+.container > .summary-box,
+.container > .pending-box,
+.container > h3,
+.container > #notifications-log {
+    margin-left: 24px;
+    margin-right: 24px;
+}
+
+[hidden] {
+    display: none !important;
+}
+
 label {
     display: block;
     margin-top: 10px;
