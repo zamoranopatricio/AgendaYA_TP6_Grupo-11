@@ -1,5 +1,4 @@
 
-
 // =============================================================
 // M06 – Navegación entre vistas (solo si existe la nav)
 // =============================================================
@@ -33,6 +32,16 @@ if (navBookingBtn && navTemplatesBtn) {
 // =============================================================
 const CHAR_LIMIT = 2000;
 
+// --- Plantillas por defecto ---
+const DEFAULT_TEMPLATES = {
+  confirmacion: 'Estimado/a [Nombre_Invitado], le confirmamos su turno para el día [Fecha] a las [Hora]. Atentamente, Dr. [Nombre_Prof].',
+  cancelacion:  'Estimado/a [Nombre_Invitado], le informamos que su turno programado para el día [Fecha] a las [Hora] ha sido cancelado. Atentamente, Dr. [Nombre_Prof].',
+  recordatorio: 'Estimado/a [Nombre_Invitado], le recordamos su turno para el día [Fecha] a las [Hora]. Atentamente, Dr. [Nombre_Prof].',
+};
+
+// Pestaña activa ('confirmacion' | 'cancelacion' | 'recordatorio')
+let activeTab = 'confirmacion';
+
 const templateTextarea = document.getElementById('template-textarea');
 const charCounter      = document.getElementById('char-counter');
 const templateError    = document.getElementById('template-error');
@@ -41,13 +50,24 @@ const btnSave          = document.getElementById('btn-save-template');
 const btnReset         = document.getElementById('btn-reset-template');
 const btnCloseModal    = document.getElementById('btn-close-modal');
 
-// Pestañas de tipo de plantilla
-document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  });
-});
+// --- Helpers de localStorage ---
+function lsKey(type) {
+  return `agendaya_plantilla_${type}`;
+}
+
+function loadTemplate(type) {
+  const stored = localStorage.getItem(lsKey(type));
+  // Evictar entradas obsoletas que todavía mencionen un servicio específico
+  if (stored && stored.includes('Ortodoncia')) {
+    localStorage.removeItem(lsKey(type));
+    return DEFAULT_TEMPLATES[type] ?? '';
+  }
+  return stored ?? DEFAULT_TEMPLATES[type] ?? '';
+}
+
+function saveTemplate(type, text) {
+  localStorage.setItem(lsKey(type), text);
+}
 
 // --- Contador de caracteres ---
 function updateCharCounter() {
@@ -57,6 +77,36 @@ function updateCharCounter() {
   charCounter.classList.toggle('counter-warning', len > CHAR_LIMIT * 0.9);
   charCounter.classList.toggle('counter-error',   len >= CHAR_LIMIT);
 }
+
+// --- Cargar la pestaña activa en el textarea ---
+function loadTab(type) {
+  if (!templateTextarea) return;
+
+  // Actualizar estado visual de pestañas
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  const tabBtn = document.getElementById(`tab-${type}`);
+  if (tabBtn) tabBtn.classList.add('active');
+
+  // Limpiar error previo
+  if (templateError) {
+    templateError.style.display = 'none';
+    templateError.textContent   = '';
+  }
+
+  // Cargar texto desde localStorage (o el default)
+  templateTextarea.value = loadTemplate(type);
+  updateCharCounter();
+}
+
+// --- Cambio de pestaña ---
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    // Extraer tipo desde el id del botón: "tab-confirmacion" → "confirmacion"
+    const type = btn.id.replace('tab-', '');
+    activeTab = type;
+    loadTab(type);
+  });
+});
 
 templateTextarea?.addEventListener('input', updateCharCounter);
 
@@ -115,14 +165,15 @@ btnSave?.addEventListener('click', () => {
     return;
   }
 
-  // Válido → mostrar modal de éxito
+  // Válido → persistir en localStorage bajo la clave de la pestaña activa
+  saveTemplate(activeTab, text);
   successModal.style.display = 'block';
 });
 
-// --- Restablecer ---
+// --- Restablecer (solo la pestaña activa) ---
 btnReset?.addEventListener('click', () => {
   if (!templateTextarea || !templateError || !successModal) return;
-  templateTextarea.value      = '';
+  templateTextarea.value      = DEFAULT_TEMPLATES[activeTab] ?? '';
   templateError.style.display = 'none';
   successModal.style.display  = 'none';
   updateCharCounter();
@@ -132,4 +183,7 @@ btnReset?.addEventListener('click', () => {
 btnCloseModal?.addEventListener('click', () => {
   if (successModal) successModal.style.display = 'none';
 });
+
+// --- Inicialización: cargar la pestaña confirmacion al arrancar ---
+loadTab(activeTab);
 
