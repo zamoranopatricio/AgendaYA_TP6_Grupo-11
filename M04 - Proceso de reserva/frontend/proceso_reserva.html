@@ -51,6 +51,19 @@
             <p id="confirmation-details"></p>
         </div>
 
+        <!-- Sección Mis Reservas -->
+        <hr>
+        <h3>Mis Reservas</h3>
+        <div style="margin-bottom: 15px;">
+            <label for="email-busqueda">Ingrese su correo para ver sus reservas:</label>
+            <input data-cy="email-busqueda-input" type="email" id="email-busqueda" placeholder="ejemplo@correo.com">
+            <button data-cy="btn-buscar-reservas" id="btn-buscar-reservas" type="button">Buscar Mis Reservas</button>
+        </div>
+        <div data-cy="mis-reservas-container" id="mis-reservas-container">
+            <!-- Las reservas se renderizarán dinámicamente aquí -->
+        </div>
+        <div data-cy="mensaje-cancelacion-resultado" id="mensaje-cancelacion-resultado" class="pending-box" style="display: none; margin-top: 10px;"></div>
+
         <!-- Simulación M06: Bandeja de Notificaciones generadas -->
         <hr>
         <h3>Bandeja de Notificaciones (Simulación M06)</h3>
