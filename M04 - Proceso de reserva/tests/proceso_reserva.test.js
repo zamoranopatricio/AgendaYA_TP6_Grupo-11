@@ -1,4 +1,4 @@
-const { validarEmail, cumpleAntelacionMinima } = require('../src/proceso_reserva');
+const { validarEmail, cumpleAntelacionMinima, estaHorarioDisponible } = require('../src/proceso_reserva');
 
 describe('Suite de Tests Unitarios - Integrante 1 (M04 Booking)', () => {
 
@@ -30,4 +30,24 @@ describe('Suite de Tests Unitarios - Integrante 1 (M04 Booking)', () => {
         expect(cumpleAntelacionMinima(fechaFutura, 2)).toBe(true);
     });
 
+});
+
+describe('Disponibilidad de horarios M04', () => {
+    const reserva = { tipoEvento: 'Consulta', fecha: '2026-09-30', hora: '10:00', estado: 'PENDIENTE' };
+
+    it('ocupa solo la combinación exacta de evento, fecha y hora', () => {
+        expect(estaHorarioDisponible('Consulta', '2026-09-30', '10:00', [reserva])).toBe(false);
+        expect(estaHorarioDisponible('Seguimiento', '2026-09-30', '10:00', [reserva])).toBe(true);
+        expect(estaHorarioDisponible('Consulta', '2026-10-01', '10:00', [reserva])).toBe(true);
+        expect(estaHorarioDisponible('Consulta', '2026-09-30', '11:00', [reserva])).toBe(true);
+    });
+
+    it('no bloquea por una selección temporal o una reserva cancelada', () => {
+        expect(estaHorarioDisponible('Consulta', '2026-09-30', '10:00', [
+            { ...reserva, estado: 'TEMPORAL' }, { ...reserva, estado: 'CANCELADA' }
+        ])).toBe(true);
+        expect(estaHorarioDisponible('Consulta', '2026-09-30', '10:00', [
+            { ...reserva, estado: 'CONFIRMADA' }
+        ])).toBe(false);
+    });
 });
