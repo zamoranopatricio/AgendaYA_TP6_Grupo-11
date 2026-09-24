@@ -31,6 +31,10 @@ describe('AgendaYA - M04 Proceso de Reserva Público', () => {
                 nombre: 'Patricio Zamorano', email: 'patricio.zamorano@test.com', estado: 'PENDIENTE'
             });
         });
+        cy.get('[data-cy="email-busqueda-input"]').type('patricio.zamorano@test.com');
+        cy.get('[data-cy="btn-buscar-reservas"]').click();
+        cy.get('[data-cy="mis-reservas-container"]')
+            .should('contain', 'Consulta Inicial').and('contain', 'pendiente');
     });
 
 });
